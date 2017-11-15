@@ -1,0 +1,21 @@
+CREATE TABLE `Sensors` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(250) CHARACTER SET utf8 NOT NULL,
+  `Address` varchar(250) CHARACTER SET utf8 NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `id_UNIQUE_sens` (`id`),
+  UNIQUE KEY `Address_UNIQUE` (`Address`),
+  UNIQUE KEY `Name_UNIQUE` (`Name`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4
+
+
+
+CREATE TABLE `SensorValue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `Value` float NOT NULL,
+  `Sensor` int(11) NOT NULL,
+  `DateTime` datetime NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=123463 DEFAULT CHARSET=utf8mb4
