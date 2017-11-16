@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name" translatable="true">Температура</string>
+    <string name="app_settings" translatable="true">Настройки</string>
+    <string name="Update">Обновить</string>
+    <string name="Sensors">Датчики</string>
+</resources>
