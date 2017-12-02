@@ -20,7 +20,7 @@
     <ListView
         android:id="@+id/Sensorslist"
         android:layout_width="match_parent"
-        android:layout_height="414dp"
+        android:layout_height="wrap_content"
         android:scrollbars="horizontal|vertical" />
 
     <LinearLayout
@@ -31,7 +31,8 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@android:string/yes" />
+            android:text="@android:string/yes"
+            android:onClick="OkSettings_Click"/>
 
         <Button
             android:layout_width="wrap_content"

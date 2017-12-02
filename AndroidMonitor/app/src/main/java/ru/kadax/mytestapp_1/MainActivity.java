@@ -39,6 +39,24 @@ public class MainActivity extends AppCompatActivity {
             setContentView(R.layout.activity_main);
         }
 
+        public void OkSettings_Click(View v)
+        {
+            if(SLA!=null) {
+                if(list!=null){
+
+                    alertBox(String.valueOf(list.getSelectedItem()));
+                    for(int i=0; SLA.getCount()<i;i++)
+                    {
+                        //SLA.getItem(i).
+                    }
+                }
+            }
+
+            setContentView(R.layout.activity_main);
+
+
+        }
+
         public void Settings_Click (View v){
             setContentView(R.layout.settingslayout);
 
