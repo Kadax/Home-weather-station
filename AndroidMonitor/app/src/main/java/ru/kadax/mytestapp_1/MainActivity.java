@@ -114,6 +114,17 @@ public class MainActivity extends AppCompatActivity {
             },"http://62.213.40.61:1180/last?sensor=12",this.getApplicationContext());
         }
 
+        public SensorItem[] GetSensorList()
+        {
+
+            return  null;
+        }
+
+        public SensorValue[] UpdateValueSensor(int[] sensid)
+        {
+            return  null;
+        }
+
         public void alertBox(String message)
         {
             AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);

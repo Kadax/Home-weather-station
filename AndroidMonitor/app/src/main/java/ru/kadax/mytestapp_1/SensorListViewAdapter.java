@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -15,17 +14,17 @@ import java.util.ArrayList;
  * Created by Kadax on 04.11.2017.
  */
 
-public class SensorListAdapter extends BaseAdapter {
-    ArrayList<SensorItem> data;
+public class SensorListViewAdapter extends BaseAdapter {
+    ArrayList<SensorValue> data;
     Context ctx;
     LayoutInflater lInflater;
 
     //Инициализация
-    public SensorListAdapter(Context context)
+    public SensorListViewAdapter(Context context)
     {
         ctx = context;
         lInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        data = new ArrayList<SensorItem>();
+        data = new ArrayList<SensorValue>();
     }
 
     // кол-во элементов
@@ -46,9 +45,9 @@ public class SensorListAdapter extends BaseAdapter {
     }
 
     //сенсор по позиции
-    SensorItem getSensor(int position)
+    SensorValue getSensor(int position)
     {
-        return ((SensorItem) getItem(position));
+        return ((SensorValue) getItem(position));
     }
 
     //пункт списка
@@ -60,9 +59,9 @@ public class SensorListAdapter extends BaseAdapter {
             view = lInflater.inflate(R.layout.sensoritemlist, parent, false);
         }
 
-        SensorItem p = getSensor(position);
+        SensorValue p = getSensor(position);
 
-        ((TextView)view.findViewById(R.id.SensId)).setText(String.valueOf(p.sensorid));
+        ((TextView)view.findViewById(R.id.SensValue)).setText(String.valueOf(p.value));
         ((TextView)view.findViewById(R.id.SensDescr)).setText(p.name);
 
        // CheckBox cbBuy = (CheckBox) view.findViewById(R.id.cbBox);
@@ -75,7 +74,7 @@ public class SensorListAdapter extends BaseAdapter {
         data.clear();
     }
 
-    public void addItem(SensorItem SI)
+    public void addItem(SensorValue SI)
     {
         data.add(SI);
     }
