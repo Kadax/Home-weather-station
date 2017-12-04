@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
     SensorListAdapter SLA;
     ListView list;
+    AlertBox ab = new AlertBox(MainActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +45,10 @@ public class MainActivity extends AppCompatActivity {
             if(SLA!=null) {
                 if(list!=null){
 
-                    alertBox(String.valueOf(list.getSelectedItem()));
+                    ab.Show(String.valueOf(list.getSelectedItem()));
                     for(int i=0; SLA.getCount()<i;i++)
                     {
-                        //SLA.getItem(i).
+
                     }
                 }
             }
@@ -67,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
             dr.fetchData(new DataCallback() {
                 @Override
                 public void onError(String errorMessage) {
-                    alertBox(errorMessage);
+                    ab.Show(errorMessage);
                 }
 
                 @Override
@@ -104,42 +105,17 @@ public class MainActivity extends AppCompatActivity {
             dr.fetchData(new DataCallback() {
                 @Override
                 public void onError(String errorMessage) {
-                    alertBox(errorMessage);
+                    ab.Show(errorMessage);
                 }
 
                 @Override
                 public void onSuccess(JSONArray result) {
-                    alertBox(String.valueOf(result));
+                    ab.Show(String.valueOf(result));
                 }
             },"http://62.213.40.61:1180/last?sensor=12",this.getApplicationContext());
         }
 
-        public SensorItem[] GetSensorList()
-        {
 
-            return  null;
-        }
-
-        public SensorValue[] UpdateValueSensor(int[] sensid)
-        {
-            return  null;
-        }
-
-        public void alertBox(String message)
-        {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-            builder.setTitle("Сообщение")
-                    .setMessage(message)
-                    .setCancelable(false)
-                    .setNegativeButton("ОК",
-                            new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    dialog.cancel();
-                                }
-                            });
-            AlertDialog alert = builder.create();
-            alert.show();
-        }
 }
 
 

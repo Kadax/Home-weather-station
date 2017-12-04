@@ -17,11 +17,9 @@ import org.json.JSONArray;
 
 import java.io.File;
 
-
 public class DataRequest {
 
     public void fetchData(final DataCallback callback, String url, Context context) {
-
 
         RequestQueue mRequestQueue;
         // Instantiate the cache
