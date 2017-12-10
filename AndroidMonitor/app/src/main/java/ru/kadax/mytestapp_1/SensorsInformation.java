@@ -24,7 +24,8 @@ public class SensorsInformation {
     String UrlSensors = "http://62.213.40.61:1180/sensors";
     String UrlValues = "http://62.213.40.61:1180/last?sensor=";
 
-    SensorsInformation(Context _context){
+    SensorsInformation(Context _context)
+    {
         context = _context;
         alertBox = new AlertBox(context);
         if(Sensors==null)
@@ -35,6 +36,7 @@ public class SensorsInformation {
         {
             values = false;
         }
+        GetSensorList();
     }
 
     public void GetSensorList()
@@ -49,8 +51,10 @@ public class SensorsInformation {
 
             @Override
             public void onSuccess(JSONArray result) {
+                Sensors.clear();
                 for(int i =0; i< result.length();i++){
                     try {
+
                         Object o = result.get(i);
                         if ( o instanceof JSONObject) {
                             JSONObject jo = (JSONObject)o;
@@ -64,17 +68,16 @@ public class SensorsInformation {
                     }
                 }
                 sensors = true;
+                GetSensorValues();
             }
         },UrlSensors,context.getApplicationContext());
     }
     public void GetSensorValues(){
-
-
+        SensorsValue.clear();
         for(int i=0;i<Sensors.size();i++)
         {
             SensorItem si = Sensors.get(i);
             final DataRequest dr =new DataRequest();
-
             dr.fetchData(new DataCallback() {
                 @Override
                 public void onError(String errorMessage) {
@@ -88,8 +91,8 @@ public class SensorsInformation {
                             Object o = result.get(i);
                             if ( o instanceof JSONObject) {
                                 JSONObject jo = (JSONObject)o;
-                                SensorItem si = new SensorItem(jo.getString("Name"),jo.getInt("id"));
-                                Sensors.add(si);
+                                SensorValue sv = new SensorValue(jo.getString("Name"),jo.getInt("id"),jo.getDouble("Value"));
+                                SensorsValue.add(sv);
                             }
                         }
                         catch (Exception ex)
@@ -97,9 +100,9 @@ public class SensorsInformation {
                             alertBox.Show(ex.getMessage());
                         }
                     }
-                    sensors = true;
+                    values = true;
                 }
-            },UrlSensors+si.sensorid,context.getApplicationContext());
+            },UrlValues+si.sensorid,context.getApplicationContext());
         }
     }
 }

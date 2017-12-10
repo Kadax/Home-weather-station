@@ -19,7 +19,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/buttonID2"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/listValues" />
 
 
     <Button
@@ -33,10 +33,10 @@
         android:text="@string/Update"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listView" />
+        app:layout_constraintTop_toBottomOf="@+id/listValues" />
 
     <ListView
-        android:id="@+id/listView"
+        android:id="@+id/listValues"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="50dp"

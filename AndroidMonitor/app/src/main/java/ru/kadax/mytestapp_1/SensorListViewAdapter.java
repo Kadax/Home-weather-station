@@ -56,7 +56,7 @@ public class SensorListViewAdapter extends BaseAdapter {
         View view = convertView;
 
         if (view == null) {
-            view = lInflater.inflate(R.layout.sensoritemlist, parent, false);
+            view = lInflater.inflate(R.layout.sensoritemlistview, parent, false);
         }
 
         SensorValue p = getSensor(position);

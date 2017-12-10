@@ -25,14 +25,15 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
 
     SensorListAdapter SLA;
+    SensorListViewAdapter SLVA;
     ListView list;
     AlertBox ab = new AlertBox(MainActivity.this);
+    SensorsInformation SI = new SensorsInformation(MainActivity.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
     }
 
@@ -44,7 +45,6 @@ public class MainActivity extends AppCompatActivity {
         {
             if(SLA!=null) {
                 if(list!=null){
-
                     ab.Show(String.valueOf(list.getSelectedItem()));
                     for(int i=0; SLA.getCount()<i;i++)
                     {
@@ -54,14 +54,10 @@ public class MainActivity extends AppCompatActivity {
             }
 
             setContentView(R.layout.activity_main);
-
-
         }
 
         public void Settings_Click (View v){
             setContentView(R.layout.settingslayout);
-
-
 
             final DataRequest dr =new DataRequest();
 
@@ -101,7 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
         public void updateBtnClick(View v)
         {
-            DataRequest dr =new DataRequest();
+
+          /*  DataRequest dr =new DataRequest();
             dr.fetchData(new DataCallback() {
                 @Override
                 public void onError(String errorMessage) {
@@ -112,7 +109,8 @@ public class MainActivity extends AppCompatActivity {
                 public void onSuccess(JSONArray result) {
                     ab.Show(String.valueOf(result));
                 }
-            },"http://62.213.40.61:1180/last?sensor=12",this.getApplicationContext());
+            },"http://62.213.40.61:1180/last?sensor=12",this.getApplicationContext());*/
+
         }
 
 
