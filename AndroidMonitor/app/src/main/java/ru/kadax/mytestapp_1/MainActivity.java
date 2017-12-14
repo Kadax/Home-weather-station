@@ -21,19 +21,25 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.Calendar;
+import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
 
     SensorListAdapter SLA;
     SensorListViewAdapter SLVA;
     ListView list;
+
+    ListView listvalue;
     AlertBox ab = new AlertBox(MainActivity.this);
-    SensorsInformation SI = new SensorsInformation(MainActivity.this);
+    SensorsInformation SI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        SI = new SensorsInformation(MainActivity.this);
 
     }
 
@@ -97,20 +103,26 @@ public class MainActivity extends AppCompatActivity {
 
         public void updateBtnClick(View v)
         {
+            if(SLVA!=null) {
+                SLVA.clearData();
+            }
+            else
+            {
+                listvalue = (ListView) findViewById(R.id.listValues);
+                SLVA = new SensorListViewAdapter(getApplicationContext());
+                listvalue.setAdapter(SLVA);
+            }
 
-          /*  DataRequest dr =new DataRequest();
-            dr.fetchData(new DataCallback() {
-                @Override
-                public void onError(String errorMessage) {
-                    ab.Show(errorMessage);
+
+            if(SI.values)
+            {
+                for(int i =0; i< SI.SensorsValue.size();i++) {
+                    SLVA.addItem(SI.SensorsValue.get(i));
                 }
+                SLVA.notifyDataSetChanged();
+            }
 
-                @Override
-                public void onSuccess(JSONArray result) {
-                    ab.Show(String.valueOf(result));
-                }
-            },"http://62.213.40.61:1180/last?sensor=12",this.getApplicationContext());*/
-
+            SI.GetSensorList();
         }
 
 

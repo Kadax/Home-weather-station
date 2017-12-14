@@ -6,6 +6,8 @@ import android.widget.ListView;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -14,8 +16,8 @@ import java.util.List;
  */
 
 public class SensorsInformation {
-    public List<SensorItem> Sensors;
-    public List<SensorValue> SensorsValue;
+    public ArrayList<SensorItem> Sensors;
+    public ArrayList<SensorValue> SensorsValue;
     public Date lastupdate;
     boolean sensors;
     boolean values;
@@ -26,8 +28,10 @@ public class SensorsInformation {
 
     SensorsInformation(Context _context)
     {
+
         context = _context;
         alertBox = new AlertBox(context);
+        alertBox.Show("1");
         if(Sensors==null)
         {
             sensors = false;
@@ -51,7 +55,12 @@ public class SensorsInformation {
 
             @Override
             public void onSuccess(JSONArray result) {
-                Sensors.clear();
+                if(Sensors!=null){
+                Sensors.clear();}
+                else
+                {
+                    Sensors = new ArrayList<SensorItem>();
+                }
                 for(int i =0; i< result.length();i++){
                     try {
 
@@ -73,10 +82,18 @@ public class SensorsInformation {
         },UrlSensors,context.getApplicationContext());
     }
     public void GetSensorValues(){
-        SensorsValue.clear();
+
+        lastupdate = Calendar.getInstance().getTime();
+        if(SensorsValue!=null){
+            SensorsValue.clear();}
+        else
+        {
+            SensorsValue = new ArrayList<SensorValue>();
+        }
+
         for(int i=0;i<Sensors.size();i++)
         {
-            SensorItem si = Sensors.get(i);
+            final SensorItem si = Sensors.get(i);
             final DataRequest dr =new DataRequest();
             dr.fetchData(new DataCallback() {
                 @Override
@@ -91,7 +108,7 @@ public class SensorsInformation {
                             Object o = result.get(i);
                             if ( o instanceof JSONObject) {
                                 JSONObject jo = (JSONObject)o;
-                                SensorValue sv = new SensorValue(jo.getString("Name"),jo.getInt("id"),jo.getDouble("Value"));
+                                SensorValue sv = new SensorValue(si.name,si.sensorid,jo.getDouble("Value"));
                                 SensorsValue.add(sv);
                             }
                         }
@@ -102,7 +119,7 @@ public class SensorsInformation {
                     }
                     values = true;
                 }
-            },UrlValues+si.sensorid,context.getApplicationContext());
+            },UrlValues+String.valueOf(si.sensorid),context.getApplicationContext());
         }
     }
 }
